@@ -1,0 +1,25 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.project.mobileMapApp"
+    },
+    "cordova-plugin-googlemaps": {
+      "PACKAGE_NAME": "com.project.mobileMapApp"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.project.mobileMapApp"
+    }
+  },
+  "dependent_plugins": {
+    "com.googlemaps.ios": {
+      "PACKAGE_NAME": "com.project.mobileMapApp"
+    }
+  }
+}

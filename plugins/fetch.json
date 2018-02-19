@@ -1,0 +1,38 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-geolocation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-geolocation@4.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-googlemaps": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-googlemaps"
+    },
+    "is_top_level": true,
+    "variables": {
+      "API_KEY_FOR_IOS": "AIzaSyAM0q1o7TD24STqqnw6nlNwu_7TnFyAKWA",
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
+      "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map"
+    }
+  },
+  "com.googlemaps.ios": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk"
+    },
+    "is_top_level": false,
+    "variables": {}
+  }
+}
