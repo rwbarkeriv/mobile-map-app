@@ -16,34 +16,55 @@
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
+
+    iOS APIKEY - AIzaSyAM0q1o7TD24STqqnw6nlNwu_7TnFyAKWA
+    Geolocation APIKEY - AIzaSyDqVui5v8OhPsukv6aYF_Ro0m9q67E6JdY
+    GMaps JS APIKEY - AIzaSyD5lShkCFWHMqPuiQXBnpqzz_MXEOsUBKs
 -->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+  <head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self'">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Mobile Geolocation</title>
+  </head>
+  <body>
+
+    <div id="map"></div>
+    <div>
+      <input type="button" value="My location" onclick="initMap()">
+      <input id="address" type="text" placeholder="Enter Address">
+      <input id="submit" type="button" value="Geocode">
+      <input id="reverse-geocode" type="button" value="Reverse-Geocode">
+    </div>
+
+    <div>
+      <input id="point-a" type="text" placeholder="Enter First Address">
+      <input id="point-b" type="text" placeholder="Enter Second Address">
+      <input id="calculate-distance" type="button" value="Calculate Distance">
+    </div>
+
+    <div>
+      <h1 id="distance-output" style="background-color: white"></h1>
+    </div>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5lShkCFWHMqPuiQXBnpqzz_MXEOsUBKs&callback=initMap&libraries=geometry"
+            async defer></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
 </html>

@@ -7,3 +7,4 @@ Geolocation app for Mobile Internet Programming course
 2. [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/)
 3. [Google Maps Info Window](https://developers.google.com/maps/documentation/javascript/infowindows)
 4. [Instance of Marker](https://stackoverflow.com/questions/44701450/google-maps-api-get-lat-and-lng-and-replace-marker)
+5. [Google Maps API Geocoding](https://developers.google.com/maps/documentation/javascript/geocoding)

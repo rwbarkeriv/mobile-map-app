@@ -49,13 +49,21 @@ function initMap() {
     });
     var geocoder = new google.maps.Geocoder();
 
-    document.getElementById('submit').addEventListener('click', function() {
+    document.getElementById('submit').addEventListener('click', function () {
         geocodeAddress(geocoder, map);
+    });
+
+    document.getElementById('calculate-distance').addEventListener('click', function () {
+        calculateDistance(geocoder, map);
+    });
+
+    document.getElementById('reverse-geocode').addEventListener('click', function () {
+        geocodeLatLng(geocoder, map);
     });
 
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -63,7 +71,7 @@ function initMap() {
 
             map.setCenter(pos);
 
-            if(marker && marker instanceof google.maps.Marker){
+            if (marker && marker instanceof google.maps.Marker) {
                 marker.setMap(null);
                 marker = null;
             }
@@ -77,11 +85,11 @@ function initMap() {
                 content: '<p>Coordinates:' + marker.getPosition() + '</p>'
             });
 
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(marker, 'click', function () {
                 infowindow.open(map, marker);
             });
 
-        }, function() {
+        }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
     } else {
@@ -96,7 +104,7 @@ function geocodeAddress(geocoder, resultsMap) {
     geocoder.geocode({'address': address}, function (results, status) {
         if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
-            if(marker && marker instanceof google.maps.Marker){
+            if (marker && marker instanceof google.maps.Marker) {
                 marker.setMap(null);
                 marker = null;
             }
@@ -109,7 +117,7 @@ function geocodeAddress(geocoder, resultsMap) {
                 content: '<p>Coordinates:' + marker.getPosition() + '</p>'
             });
 
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(marker, 'click', function () {
                 infowindow.open(resultsMap, marker);
             });
         } else {
@@ -119,9 +127,92 @@ function geocodeAddress(geocoder, resultsMap) {
 
 }
 
-function getMyLocation() {
+function geocodeLatLng(geocoder, resultsMap) {
+    var input = document.getElementById('address').value;
+    var latlngStr = input.split(',', 2);
+    var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+    geocoder.geocode({'location': latlng}, function (results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+                resultsMap.setCenter(results[0].geometry.location);
+                resultsMap.setZoom(7);
+                if (marker && marker instanceof google.maps.Marker) {
+                    marker.setMap(null);
+                    marker = null;
+                }
+
+                marker = new google.maps.Marker({
+                    position: latlng,
+                    map: resultsMap
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: results[0].formatted_address,
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+
+            } else {
+                window.alert('No results found');
+            }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
+
+function calculateDistance(geocoder, resultsMap) {
+
+    function findPointA(geocoder, resultsMap, callback) {
+        var pointA = document.getElementById('point-a').value;
+        geocoder.geocode({'address': pointA}, function (results, status) {
+            if (status == 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                if (marker && marker instanceof google.maps.Marker) {
+                    marker.setMap(null);
+                    marker = null;
+                }
+                marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location,
+                });
+                callback(results[0].geometry.location.lat(), results[0].geometry.location.lng())
+
+
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    function findPointB(geocoder, resultsMap, callback) {
+        var pointB = document.getElementById('point-b').value;
+        geocoder.geocode({'address': pointB}, function (results, status) {
+            if (status == 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+                callback(results[0].geometry.location.lat(), results[0].geometry.location.lng())
+
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    findPointA(geocoder, resultsMap, function (latPointA, lngPointA) {
+        findPointB(geocoder, resultsMap, function (latPointB, lngPointB) {
+            var pointA = new google.maps.LatLng(latPointA, lngPointA);
+            var pointB = new google.maps.LatLng(latPointB, lngPointB);
+            document.getElementById('distance-output').innerHTML = "<p>" + (google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB) / 1000).toFixed(2) + " kilometers</p>";
+        });
+    })
 
 }
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
