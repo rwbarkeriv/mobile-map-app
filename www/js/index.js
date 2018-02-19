@@ -177,6 +177,14 @@ function calculateDistance(geocoder, resultsMap) {
                     map: resultsMap,
                     position: results[0].geometry.location,
                 });
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<p>Coordinates:' + marker.getPosition() + '</p>'
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(resultsMap, marker);
+                });
                 callback(results[0].geometry.location.lat(), results[0].geometry.location.lng())
 
 
@@ -194,6 +202,14 @@ function calculateDistance(geocoder, resultsMap) {
                 var marker = new google.maps.Marker({
                     map: resultsMap,
                     position: results[0].geometry.location
+                });
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<p>Coordinates:' + marker.getPosition() + '</p>'
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(resultsMap, marker);
                 });
                 callback(results[0].geometry.location.lat(), results[0].geometry.location.lng())
 
