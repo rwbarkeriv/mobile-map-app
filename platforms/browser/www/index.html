@@ -45,16 +45,18 @@
 
     <div id="map"></div>
     <div>
-      <input type="button" value="My location" onclick="initMap()">
-      <input id="address" type="text" placeholder="Enter Address">
-      <input id="submit" type="button" value="Geocode">
-      <input id="reverse-geocode" type="button" value="Reverse-Geocode">
+      <input class="btn" id="find-me" type="button" value="Find Me" onclick="initMap()">
+      <h2>Find Location</h2>
+      <input id="address" type="text" placeholder="Los Angeles / 11.23, 44.55">
+      <input class="btn" id="submit" type="button" value="Search">
+      <!--<input class="btn" id="reverse-geocode" type="button" value="Reverse-Geocode">-->
     </div>
 
     <div>
-      <input id="point-a" type="text" placeholder="Enter First Address">
-      <input id="point-b" type="text" placeholder="Enter Second Address">
-      <input id="calculate-distance" type="button" value="Calculate Distance">
+      <h2>Find Distance Between Locations</h2>
+      <input id="point-a" type="text" placeholder="Point A">
+      <input id="point-b" type="text" placeholder="Point B">
+      <input class="btn" id="calculate-distance" type="button" value="Calculate Distance">
     </div>
 
     <div>
@@ -63,8 +65,7 @@
 
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5lShkCFWHMqPuiQXBnpqzz_MXEOsUBKs&callback=initMap&libraries=geometry"
-            async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD80tsB8dh5kuglnWff0lehWwoYZ1KEEc&callback=initMap&libraries=geometry" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>

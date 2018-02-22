@@ -1,37 +1,6 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
-
-    iOS APIKEY - AIzaSyAM0q1o7TD24STqqnw6nlNwu_7TnFyAKWA
-    Geolocation APIKEY - AIzaSyDqVui5v8OhPsukv6aYF_Ro0m9q67E6JdY
-    GMaps JS APIKEY - AIzaSyD5lShkCFWHMqPuiQXBnpqzz_MXEOsUBKs
--->
 <html>
   <head>
-    <!--
-    Customize this policy to fit your own app's needs. For more guidance, see:
-        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-    Some notes:
-        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-            * Enable inline JS: add 'unsafe-inline' to default-src
-    -->
     <meta http-equiv="Content-Security-Policy"
           content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self'">
     <meta name="format-detection" content="telephone=no">
@@ -45,16 +14,17 @@
 
     <div id="map"></div>
     <div>
-      <input type="button" value="My location" onclick="initMap()">
-      <input id="address" type="text" placeholder="Enter Address">
-      <input id="submit" type="button" value="Geocode">
-      <input id="reverse-geocode" type="button" value="Reverse-Geocode">
+      <input class="btn" id="find-me" type="button" value="Find Me" onclick="initMap()">
+      <h2>Find Location</h2>
+      <input id="address" type="text" placeholder="Los Angeles / 11.23, 44.55">
+      <input class="btn" id="submit" type="button" value="Search">
     </div>
 
     <div>
-      <input id="point-a" type="text" placeholder="Enter First Address">
-      <input id="point-b" type="text" placeholder="Enter Second Address">
-      <input id="calculate-distance" type="button" value="Calculate Distance">
+      <h2>Find Distance Between Locations</h2>
+      <input id="point-a" type="text" placeholder="Point A">
+      <input id="point-b" type="text" placeholder="Point B">
+      <input class="btn" id="calculate-distance" type="button" value="Calculate Distance">
     </div>
 
     <div>
@@ -63,8 +33,9 @@
 
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5lShkCFWHMqPuiQXBnpqzz_MXEOsUBKs&callback=initMap&libraries=geometry"
-            async defer></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD80tsB8dh5kuglnWff0lehWwoYZ1KEEc&callback=initMap&libraries=geometry"
+            type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>
